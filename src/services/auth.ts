@@ -23,7 +23,7 @@ const registerNewUser = async ({ email, password, name }: User) => {
 const loginUser = async ({ email, password }: Auth) => {
   const checkIs = await UserModel.findOne({ email });
 
-  if (!checkIs) return "ALREADY_USER";
+  if (!checkIs) return "USER_NO_REGISTER";
 
   console.log("checkIs de Login ", checkIs.password);
 

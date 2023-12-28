@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getOrders } from "../controllers/order";
+import { getOrders, postOrder } from "../controllers/order";
 import { checkJwt } from "../middleware/session";
 
 //Solo personas que tengan un jwt valido
@@ -7,6 +7,7 @@ import { checkJwt } from "../middleware/session";
 const router = Router()
 
 router.get("/", checkJwt, getOrders)
+router.post("/", checkJwt, postOrder)
 
 export {
     router

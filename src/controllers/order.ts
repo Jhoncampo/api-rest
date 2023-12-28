@@ -1,10 +1,9 @@
 import { Request, Response } from "express";
 import { handleHttp } from "../utils/error.handle";
-import { JwtPayload } from "jsonwebtoken";
+import { insertOrder } from "../services/order";
+import { RequestExt } from "../interfaces/req-ext";
 
-interface RequestExt extends Request {
-    user?: string| JwtPayload
-  }
+
 
 const getOrders = (req: RequestExt, res: Response) =>{
     try {
@@ -17,6 +16,15 @@ const getOrders = (req: RequestExt, res: Response) =>{
     }
 }
 
+const postOrder = async ({body}: Request, res:Response)=>{
+    try {
+        const response = await insertOrder(body)
+        res.send(response)
+    } catch (error) {
+        handleHttp(res, "ERROR_POST_ORDER")
+    }
+}
+
 export {
-    getOrders
+    getOrders, postOrder
 }
